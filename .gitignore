@@ -42,3 +42,8 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+/.pnp.cjs
+/.pnp.loader.mjs
+/.yarn/unplugged/
+/.yarn/.cache/
+/.yarn/install-state.gz
