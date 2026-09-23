@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+
+:root {
+  --background: #0a0c10;
+  --font-color: #e1e1e1;
+  --margin: 15px;
+  --padding: 15px;
+  --gap: 15px;
+}
+
+html, body {
+  height: 100%;
+  padding: 0;
+  margin: 0; /* Clears default browser spacing */
+}
+
+body {
+  background: var(--background);
+  color: var(--font-color);
+  font-family: "Fira Sans", sans-serif;
+  display: flex;
+  justify-content: center;
+}

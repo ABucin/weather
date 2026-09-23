@@ -1,0 +1,35 @@
+:host {
+  padding: var(--padding);
+
+  &:has(> .loader) {
+    height: calc(100% - 2 * var(--padding));
+    display: flex;
+    align-items: center;
+  }
+}
+
+.container {
+  display: grid;
+  gap: var(--gap);
+  grid-auto-flow: column;
+}
+
+.weather {
+  display: grid;
+  gap: var(--gap);
+  justify-items: center;
+}
+
+.loader {
+  animation: rotate 2s infinite linear;
+}
+
+@keyframes rotate {
+  from {
+    rotate: 0;
+  }
+
+  to {
+    rotate: 360deg;
+  }
+}

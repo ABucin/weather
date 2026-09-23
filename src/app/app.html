@@ -1,0 +1,13 @@
+@if (isLoading()) {
+  <ng-icon class="loader" size="64" name="featherLoader" />
+} @else if (weather()) {
+  <div class="container">
+    @for (w of dailyWeather(); track $index) {
+      <div class="weather">
+        <ng-icon size="36" [name]="w.code" />
+        <div>{{ w.minTemp }}°C {{ w.maxTemp }}°C</div>
+        <div>{{ w.time }}</div>
+      </div>
+    }
+  </div>
+}
