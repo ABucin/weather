@@ -10,7 +10,7 @@ export interface WeatherResponse {
 }
 
 export interface WeatherUI {
-  time: string;
+  date: string;
   maxTemp: number;
   minTemp: number;
   code: string;

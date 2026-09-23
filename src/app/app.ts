@@ -33,7 +33,11 @@ export class App {
     Array(this.NR_DAYS)
       .fill(0)
       .map((_, i) => ({
-        time: this.weather()?.daily?.time[i] || '',
+        date: Temporal.PlainDate.from(this.weather()?.daily?.time[i] || '').toLocaleString('en-US', {
+          month: 'long',
+          day: 'numeric',
+          year: 'numeric',
+        }),
         maxTemp: this.weather()?.daily?.temperature_2m_max[i] || 0,
         minTemp: this.weather()?.daily?.temperature_2m_min[i] || 0,
         code: this.mapWmoCode(this.weather()?.daily?.weather_code[i] as WmoCode),

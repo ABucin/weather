@@ -4,10 +4,15 @@
   <div class="container">
     @for (w of dailyWeather(); track $index) {
       <div class="weather">
-        <ng-icon size="36" [name]="w.code" />
-        <div>{{ w.minTemp }}°C {{ w.maxTemp }}°C</div>
-        <div>{{ w.time }}</div>
+        <ng-icon class="icon" size="48" [name]="w.code" />
+        <div class="temperature"><span class="temperature-min">
+          {{ w.minTemp }}°C
+        </span><span class="temperature-max">{{ w.maxTemp }}°C</span></div>
+        <div class="date">{{ w.date }}</div>
       </div>
+      @if (!$last) {
+        <div class="separator"></div>
+      }
     }
   </div>
 }

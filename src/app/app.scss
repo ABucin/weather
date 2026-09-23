@@ -18,6 +18,28 @@
   display: grid;
   gap: var(--gap);
   justify-items: center;
+
+  .icon {
+    margin: var(--margin-sm) 0;
+  }
+
+  .temperature {
+    font-size: var(--font-size-lg);
+
+    &-min {
+      color: var(--primary);
+    }
+
+    &-max {
+      color: var(--error);
+    }
+  }
+}
+
+.separator {
+  width: 1px;
+  background: var(--border-default);
+  height: 100%;
 }
 
 .loader {
