@@ -1,8 +1,11 @@
 :host {
-  padding: var(--padding);
+  margin: var(--margin);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-lg);
 
   &:has(> .loader) {
-    height: calc(100% - 2 * var(--padding));
+    height: calc(100% - 2 * var(--margin));
     display: flex;
     align-items: center;
   }
@@ -12,6 +15,8 @@
   display: grid;
   gap: var(--gap);
   grid-auto-flow: column;
+  justify-items: center;
+  max-width: 500px;
 }
 
 .weather {
@@ -19,11 +24,21 @@
   gap: var(--gap);
   justify-items: center;
 
+  &--past {
+    opacity: .5;
+  }
+
   .icon {
     margin: var(--margin-sm) 0;
   }
 
+  .date {
+    text-align: center;
+  }
+
   .temperature {
+    display: grid;
+    justify-items: center;
     font-size: var(--font-size-lg);
 
     &-min {

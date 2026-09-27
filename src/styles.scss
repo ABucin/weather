@@ -37,6 +37,7 @@
   --margin: 15px;
   --padding: 15px;
   --gap: 15px;
+  --gap-lg: 30px;
 
   --font-size-lg: 24px;
   --font-size: 16px;
@@ -53,6 +54,4 @@ body {
   background: var(--background);
   color: var(--font-color);
   font-family: "Fira Sans", sans-serif;
-  display: flex;
-  justify-content: center;
 }

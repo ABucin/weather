@@ -3,16 +3,23 @@
 } @else if (weather()) {
   <div class="container">
     @for (w of dailyWeather(); track $index) {
-      <div class="weather">
+      <div class="weather" [class.weather--past]="w.inPast">
         <ng-icon class="icon" size="48" [name]="w.code" />
-        <div class="temperature"><span class="temperature-min">
-          {{ w.minTemp }}°C
-        </span><span class="temperature-max">{{ w.maxTemp }}°C</span></div>
-        <div class="date">{{ w.date }}</div>
+        <div class="temperature">
+          <div class="temperature-max">{{ w.maxTemp }}°C</div>
+          <div class="temperature-min">
+            {{ w.minTemp }}°C
+          </div>
+        </div>
+        <div class="date">{{ w.dateTime }}</div>
       </div>
       @if (!$last) {
         <div class="separator"></div>
       }
     }
+  </div>
+
+  <div class="container">
+    <chart [weather]="weather()" />
   </div>
 }

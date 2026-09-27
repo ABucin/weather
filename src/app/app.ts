@@ -1,27 +1,45 @@
 import { HttpResourceRef } from '@angular/common/http';
 import { Component, computed, inject } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { WeatherResponse, WeatherUI, WMO_CODE_MAPPING, WmoCode } from '../model/weather.model';
-import { WeatherService } from '../services/weather.service';
 import {
-  featherCloudDrizzle,
-  featherSun,
-  featherCloudRain,
   featherCloud,
+  featherCloudDrizzle,
+  featherCloudRain,
   featherLoader,
+  featherSun
 } from '@ng-icons/feather-icons';
+import { ChartComponent } from '../components/chart.component';
+import {
+  NR_DAYS,
+  NR_PAST_DAYS,
+  WeatherDaily,
+  WeatherResponse,
+  WeatherUI,
+  WMO_CODE_MAPPING,
+  WmoCode
+} from '../model/weather.model';
+import { WeatherService } from '../services/weather.service';
 
 @Component({
-  imports: [NgIcon],
-  providers: [provideIcons({ featherCloudDrizzle, featherSun, featherCloudRain, featherCloud, featherLoader })],
+  providers: [
+    provideIcons({
+      featherCloudDrizzle,
+      featherSun,
+      featherCloudRain,
+      featherCloud,
+      featherLoader
+    })
+  ],
   selector: 'app-root',
   styleUrl: './app.scss',
-  templateUrl: './app.html',
+  imports: [
+    NgIcon,
+    ChartComponent
+  ],
+  templateUrl: './app.html'
 })
 export class App {
   private readonly weatherService = inject(WeatherService);
-
-  private readonly NR_DAYS = 7;
 
   private weatherResponse: HttpResourceRef<WeatherResponse | undefined> =
     this.weatherService.weatherResponse;
@@ -29,20 +47,36 @@ export class App {
   protected weather = this.weatherResponse.value;
   protected isLoading = this.weatherResponse.isLoading;
 
-  public dailyWeather = computed<WeatherUI[]>(() =>
-    Array(this.NR_DAYS)
+  public dailyWeather = computed<WeatherUI[]>(() => this.mapWeatherData(this.weather()?.daily));
+
+  private mapWeatherData(weather: WeatherDaily | undefined): WeatherUI[] {
+    return Array(NR_DAYS + NR_PAST_DAYS)
       .fill(0)
-      .map((_, i) => ({
-        date: Temporal.PlainDate.from(this.weather()?.daily?.time[i] || '').toLocaleString('en-US', {
-          month: 'long',
+      .map((_, i): WeatherUI => {
+        const dateTimeMs = Number.parseInt(weather?.time[i] ?? '0') * 1000;
+        const dateTime = Temporal.Instant.fromEpochMilliseconds(dateTimeMs).toLocaleString('en-UK', {
+          month: 'short',
           day: 'numeric',
-          year: 'numeric',
-        }),
-        maxTemp: this.weather()?.daily?.temperature_2m_max[i] || 0,
-        minTemp: this.weather()?.daily?.temperature_2m_min[i] || 0,
-        code: this.mapWmoCode(this.weather()?.daily?.weather_code[i] as WmoCode),
-      })),
-  );
+          year: 'numeric'
+        });
+        const now = Temporal.PlainDate.from(Temporal.Now.plainDateISO());
+        const tz = Temporal.Now.timeZoneId();
+
+        return {
+          dateTime,
+          inPast:
+            Temporal.PlainDate.compare(
+              Temporal.Instant.fromEpochMilliseconds(dateTimeMs)
+                .toZonedDateTimeISO(tz)
+                .toPlainDate(),
+              now
+            ) === -1,
+          maxTemp: weather?.temperature_2m_max[i]?.toFixed(0) || '',
+          minTemp: weather?.temperature_2m_min[i]?.toFixed(0) || '',
+          code: this.mapWmoCode(weather?.weather_code[i] as WmoCode)
+        };
+      });
+  }
 
   private mapWmoCode(code: WmoCode): string {
     const entry = WMO_CODE_MAPPING[code];

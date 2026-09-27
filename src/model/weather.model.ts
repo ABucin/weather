@@ -10,10 +10,11 @@ export interface WeatherResponse {
 }
 
 export interface WeatherUI {
-  date: string;
-  maxTemp: number;
-  minTemp: number;
+  dateTime: string;
+  maxTemp: string;
+  minTemp: string;
   code: string;
+  inPast: boolean;
 }
 
 export interface WeatherCode {
@@ -21,8 +22,10 @@ export interface WeatherCode {
   icon: string;
 }
 
-export type WmoCode = 0 | 1 | 3 | 45 | 61 | 80;
+export type WmoCode = 0 | 1 | 2| 3 | 45 | 61 | 80;
 
+export const NR_DAYS = 7;
+export const NR_PAST_DAYS = 2;
 export const WMO_CODE_MAPPING: Record<WmoCode, WeatherCode> = {
   0: {
     description: 'Clear sky',
@@ -31,6 +34,10 @@ export const WMO_CODE_MAPPING: Record<WmoCode, WeatherCode> = {
   1: {
     description: 'Mainly clear',
     icon: 'featherCloudRain',
+  },
+  2: {
+    description: 'Partly cloudy',
+    icon: 'featherCloud',
   },
   3: {
     description: 'Overcast',
