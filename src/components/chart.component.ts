@@ -2,7 +2,7 @@ import { Component, computed, effect, ElementRef, input, viewChild } from '@angu
 import { WeatherResponse } from '../model/weather.model';
 
 @Component({
-  selector: 'chart',
+  selector: 'wa-chart',
   templateUrl: 'chart.component.html',
   styleUrl: 'chart.component.scss',
 })
@@ -53,13 +53,14 @@ export class ChartComponent {
       this.scaleCelsiusToPx(t, minC, maxC, padding, height - padding),
     );
 
-    this.drawLine(ctx, highsScale, padding, '#f85149');
-    this.drawLine(ctx, lowsScale, padding, '#58a6ff');
+    this.drawLine(ctx, highsScale, this.maxTemperature(), padding, 'rgba(248,81,73,1)');
+    this.drawLine(ctx, lowsScale, this.minTemperature(), padding, 'rgba(88,166,255,1)');
   }
 
   private drawLine(
     ctx: CanvasRenderingContext2D,
     source: number[] = [],
+    labelSource: number[] = [],
     padding: number,
     color: string = 'white',
   ): void {
@@ -68,16 +69,17 @@ export class ChartComponent {
     const xScale = (600 - padding) / source.length;
 
     ctx.strokeStyle = color;
-    ctx.beginPath();
-    ctx.moveTo(padding, 250 + scaleFactor - padding);
-    ctx.arc(padding, 250 + scaleFactor - padding, 3, 0, 180);
+    ctx.moveTo(xScale, 250 + scaleFactor - padding);
+    ctx.arc(xScale, 250 + scaleFactor - padding, 3, 0, 180);
     ctx.fillStyle = color;
+    ctx.beginPath();
 
     source.forEach((temperature, i) => {
       ctx.lineTo(xScale * (i + 1), temperature + scaleFactor);
       ctx.moveTo(xScale * (i + 1), temperature + scaleFactor);
       ctx.arc(xScale * (i + 1), temperature + scaleFactor, 3, 0, 180);
       ctx.fillStyle = color;
+      ctx.fillText(labelSource[i].toString(), xScale * (i + 1), temperature + scaleFactor - 10);
     });
 
     ctx.stroke();

@@ -57,7 +57,7 @@ export class App {
         const dateTime = Temporal.Instant.fromEpochMilliseconds(dateTimeMs).toLocaleString('en-UK', {
           month: 'short',
           day: 'numeric',
-          year: 'numeric'
+          weekday: 'short',
         });
         const now = Temporal.PlainDate.from(Temporal.Now.plainDateISO());
         const tz = Temporal.Now.timeZoneId();
