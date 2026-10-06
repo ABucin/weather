@@ -33,8 +33,9 @@
   --error: #f85149;
   --error-bg: rgba(248, 81, 73, 0.1);
 
-  --margin-sm: 10px;
   --margin: 15px;
+  --margin-sm: 10px;
+  --margin-xs: 5px;
   --padding: 15px;
   --gap: 15px;
   --gap-lg: 30px;
@@ -42,6 +43,7 @@
   --font-size-lg: 24px;
   --font-size: 16px;
   --font-size-sm: 14px;
+  --font-size-xs: 12px;
 }
 
 html, body {
@@ -55,4 +57,8 @@ body {
   background: var(--background);
   color: var(--font-color);
   font-family: "Fira Sans", sans-serif;
+}
+
+.fade {
+  opacity: .4;
 }

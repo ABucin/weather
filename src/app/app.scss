@@ -24,10 +24,6 @@
   gap: var(--gap);
   justify-items: center;
 
-  &--past {
-    opacity: .4;
-  }
-
   .icon {
     margin: var(--margin-sm) 0;
   }
@@ -35,6 +31,17 @@
   .date {
     text-align: center;
     font-size: var(--font-size-sm);
+  }
+
+  .precipitation {
+    text-align: center;
+    font-size: var(--font-size-sm);
+    color: var(--secondary);
+    display: inline-flex;
+
+    &-icon {
+      margin: 0 var(--margin-xs);
+    }
   }
 
   .temperature {

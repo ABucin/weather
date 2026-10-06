@@ -3,13 +3,19 @@
 } @else if (weather()) {
   <div class="container">
     @for (w of dailyWeather(); track $index) {
-      <div class="weather" [class.weather--past]="w.inPast">
+      <div class="weather" [class.fade]="w.inPast">
         <ng-icon class="icon" size="48" [name]="w.code" />
         <div class="temperature">
           <div class="temperature-max">{{ w.maxTemp }}°C</div>
           <div class="temperature-min">
             {{ w.minTemp }}°C
           </div>
+        </div>
+        <div
+          class="precipitation"
+          [class.fade]="w.precipitation  ===  '0'">{{ w.precipitation }}%
+          <ng-icon class="precipitation-icon" size="14"
+                   name="featherUmbrella" />
         </div>
         <div class="date">{{ w.dateTime }}</div>
       </div>

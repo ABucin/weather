@@ -6,7 +6,8 @@ import {
   featherCloudDrizzle,
   featherCloudRain,
   featherLoader,
-  featherSun
+  featherSun,
+  featherUmbrella,
 } from '@ng-icons/feather-icons';
 import { ChartComponent } from '../components/chart.component';
 import {
@@ -23,6 +24,7 @@ import { WeatherService } from '../services/weather.service';
 @Component({
   providers: [
     provideIcons({
+      featherUmbrella,
       featherCloudDrizzle,
       featherSun,
       featherCloudRain,
@@ -69,11 +71,12 @@ export class App {
               Temporal.Instant.fromEpochMilliseconds(dateTimeMs)
                 .toZonedDateTimeISO(tz)
                 .toPlainDate(),
-              now
+              now,
             ) === -1,
           maxTemp: weather?.temperature_2m_max[i]?.toFixed(0) || '',
           minTemp: weather?.temperature_2m_min[i]?.toFixed(0) || '',
-          code: this.mapWmoCode(weather?.weather_code[i] as WmoCode)
+          precipitation: `${weather?.precipitation_probability_max[i]}` || '',
+          code: this.mapWmoCode(weather?.weather_code[i] as WmoCode),
         };
       });
   }
@@ -82,4 +85,6 @@ export class App {
     const entry = WMO_CODE_MAPPING[code];
     return entry?.icon;
   }
+
+  protected readonly featherUmbrella = featherUmbrella;
 }

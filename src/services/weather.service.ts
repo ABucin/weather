@@ -10,7 +10,7 @@ export class WeatherService {
       params: {
         latitude: '46.7614',
         longitude: '23.6138',
-        daily: 'temperature_2m_max,temperature_2m_min,weather_code',
+        daily: 'temperature_2m_max,temperature_2m_min,weather_code,precipitation_probability_max',
         past_days: NR_PAST_DAYS,
         timeformat: 'unixtime',
       },

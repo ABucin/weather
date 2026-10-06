@@ -1,6 +1,7 @@
 export interface WeatherDaily {
   temperature_2m_min: number[];
   temperature_2m_max: number[];
+  precipitation_probability_max: number[];
   time: string[];
   weather_code: number[];
 }
@@ -15,6 +16,7 @@ export interface WeatherUI {
   minTemp: string;
   code: string;
   inPast: boolean;
+  precipitation: string;
 }
 
 export interface WeatherCode {

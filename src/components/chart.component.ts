@@ -72,6 +72,7 @@ export class ChartComponent {
     ctx.moveTo(xScale, 250 + scaleFactor - padding);
     ctx.arc(xScale, 250 + scaleFactor - padding, 3, 0, 180);
     ctx.fillStyle = color;
+    ctx.font = '12px Fira Sans';
     ctx.beginPath();
 
     source.forEach((temperature, i) => {
