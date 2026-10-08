@@ -9,7 +9,8 @@ import {
   featherSun,
   featherUmbrella,
 } from '@ng-icons/feather-icons';
-import { ChartComponent } from '../components/chart.component';
+import { CardComponent } from '../components/card/card.component';
+import { ChartComponent } from '../components/chart/chart.component';
 import {
   NR_DAYS,
   NR_PAST_DAYS,
@@ -36,7 +37,8 @@ import { WeatherService } from '../services/weather.service';
   styleUrl: './app.scss',
   imports: [
     NgIcon,
-    ChartComponent
+    ChartComponent,
+    CardComponent
   ],
   templateUrl: './app.html'
 })

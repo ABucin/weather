@@ -1,0 +1,16 @@
+<div class="weather" [class.fade]="inPast()">
+  <ng-icon class="icon" size="48" [name]="code()" />
+  <div class="temperature">
+    <div class="temperature-max">{{ maxTemp() }}°C</div>
+    <div class="temperature-min">
+      {{ minTemp() }}°C
+    </div>
+  </div>
+  <div
+    class="precipitation"
+    [class.fade]="precipitation()  ===  '0'">{{ precipitation() }}%
+    <ng-icon class="precipitation-icon" size="14"
+             name="featherUmbrella" />
+  </div>
+  <div class="date">{{ dateTime() }}</div>
+</div>

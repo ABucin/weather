@@ -1,5 +1,5 @@
 import { Component, computed, effect, ElementRef, input, viewChild } from '@angular/core';
-import { WeatherResponse } from '../model/weather.model';
+import { WeatherResponse } from '../../model/weather.model';
 
 @Component({
   selector: 'wa-chart',
